@@ -22,13 +22,13 @@ function Layout({ children }) {
       icon: "ri-file-list-line",
     },
     {
-      name: "Apply Doctor",
-      path: "/apply-doctor",
+      name: "Apply Hairstylist",
+      path: "/apply-hairstylist",
       icon: "ri-hospital-line",
     }
   ];
 
-  const doctorMenu = [
+  const hairstylistMenu = [
     {
       name: "Home",
       path: "/",
@@ -36,12 +36,12 @@ function Layout({ children }) {
     },
     {
       name: "Appointments",
-      path: "/doctor/appointments",
+      path: "/hairstylist/appointments",
       icon: "ri-file-list-line",
     },
     {
       name: "Profile",
-      path: `/doctor/profile/${user?._id}`,
+      path: `/hairstylist/profile/${user?._id}`,
       icon: "ri-user-line",
     },
   ];
@@ -58,8 +58,8 @@ function Layout({ children }) {
       icon: "ri-user-line",
     },
     {
-      name: "Doctors",
-      path: "/admin/doctorslist",
+      name: "Hairstylists",
+      path: "/admin/hairstylistslist",
       icon: "ri-user-star-line",
     },
     {
@@ -69,14 +69,14 @@ function Layout({ children }) {
     },
   ];
 
-  const menuToBeRendered = user?.isAdmin ? adminMenu : user?.isDoctor ? doctorMenu : userMenu;
-  const role = user?.isAdmin ? "Admin" : user?.isDoctor ? "Doctor" : "User";
+  const menuToBeRendered = user?.isAdmin ? adminMenu : user?.isHairstylist ? hairstylistMenu : userMenu;
+  const role = user?.isAdmin ? "Admin" : user?.isHairstylist ? "Hairstylist" : "User";
   return (
     <div className="main">
       <div className="d-flex layout">
         <div className="sidebar">
           <div className="sidebar-header">
-            <h1 className="logo">SH</h1>
+            <h1 className="logo">BRAIDING SALOON</h1>
             <h1 className="role">{role}</h1>
           </div>
 

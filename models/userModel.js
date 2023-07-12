@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    isDoctor: {
+    isHairstylist: {
       type: Boolean,
       default: false,
     },

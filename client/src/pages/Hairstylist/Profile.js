@@ -6,20 +6,20 @@ import { showLoading, hideLoading } from "../../redux/alertsSlice";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import DoctorForm from "../../components/DoctorForm";
+import HairstylistForm from "../../components/HairstylistForm";
 import moment from "moment";
 
 function Profile() {
   const { user } = useSelector((state) => state.user);
   const params = useParams();
-  const [doctor, setDoctor] = useState(null);
+  const [hairstylist, setHairstylist] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onFinish = async (values) => {
     try {
       dispatch(showLoading());
       const response = await axios.post(
-        "/api/doctor/update-doctor-profile",
+        "/api/hairstylist/update-hairstylist-profile",
         {
           ...values,
           userId: user._id,
@@ -47,11 +47,11 @@ function Profile() {
     }
   };
 
-  const getDoctorData = async () => {
+  const getHairstylistData = async () => {
     try {
       dispatch(showLoading());
       const response = await axios.post(
-        "/api/doctor/get-doctor-info-by-user-id",
+        "/api/hairstylist/get-hairstylist-info-by-user-id",
         {
           userId: params.userId,
         },
@@ -64,7 +64,7 @@ function Profile() {
 
       dispatch(hideLoading());
       if (response.data.success) {
-        setDoctor(response.data.data);
+        setHairstylist(response.data.data);
       }
     } catch (error) {
       console.log(error);
@@ -73,13 +73,13 @@ function Profile() {
   };
 
   useEffect(() => {
-    getDoctorData();
+    getHairstylistData();
   }, []);
   return (
     <Layout>
-      <h1 className="page-title">Doctor Profile</h1>
+      <h1 className="page-title">Hairstylist Profile</h1>
       <hr />
-      {doctor && <DoctorForm onFinish={onFinish} initivalValues={doctor} />}
+      {hairstylist && <HairstylistForm onFinish={onFinish} initivalValues={hairstylist} />}
     </Layout>
   );
 }

@@ -1,21 +1,21 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/userModel");
-const Doctor = require("../models/doctorModel");
+const Hairstylist = require("../models/hairstylistModel");
 const authMiddleware = require("../middlewares/authMiddleware");
 
-router.get("/get-all-doctors", authMiddleware, async (req, res) => {
+router.get("/get-all-hairstylists", authMiddleware, async (req, res) => {
   try {
-    const doctors = await Doctor.find({});
+    const hairstylists = await Hairstylist.find({});
     res.status(200).send({
-      message: "Doctors fetched successfully",
+      message: "Hairstylists fetched successfully",
       success: true,
-      data: doctors,
+      data: hairstylists,
     });
   } catch (error) {
     console.log(error);
     res.status(500).send({
-      message: "Error applying doctor account",
+      message: "Error applying hairstylist account",
       success: false,
       error,
     });
@@ -33,7 +33,7 @@ router.get("/get-all-users", authMiddleware, async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).send({
-      message: "Error applying doctor account",
+      message: "Error applying hairstylist account",
       success: false,
       error,
     });
@@ -41,34 +41,34 @@ router.get("/get-all-users", authMiddleware, async (req, res) => {
 });
 
 router.post(
-  "/change-doctor-account-status",
+  "/change-hairstylist-account-status",
   authMiddleware,
   async (req, res) => {
     try {
-      const { doctorId, status } = req.body;
-      const doctor = await Doctor.findByIdAndUpdate(doctorId, {
+      const { hairstylistId, status } = req.body;
+      const hairstylist = await Hairstylist.findByIdAndUpdate(hairstylistId, {
         status,
       });
 
-      const user = await User.findOne({ _id: doctor.userId });
+      const user = await User.findOne({ _id: hairstylist.userId });
       const unseenNotifications = user.unseenNotifications;
       unseenNotifications.push({
-        type: "new-doctor-request-changed",
-        message: `Your doctor account has been ${status}`,
+        type: "new-hairstylist-request-changed",
+        message: `Your hairstylist account has been ${status}`,
         onClickPath: "/notifications",
       });
-      user.isDoctor = status === "approved" ? true : false;
+      user.isHairstylist = status === "approved" ? true : false;
       await user.save();
 
       res.status(200).send({
-        message: "Doctor status updated successfully",
+        message: "Hairstylist status updated successfully",
         success: true,
-        data: doctor,
+        data: hairstylist,
       });
     } catch (error) {
       console.log(error);
       res.status(500).send({
-        message: "Error applying doctor account",
+        message: "Error applying hairstylist account",
         success: false,
         error,
       });

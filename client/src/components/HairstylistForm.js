@@ -2,7 +2,7 @@ import { Button, Col, Form, Input, Row, TimePicker } from "antd";
 import moment from "moment";
 import React from "react";
 
-function DoctorForm({ onFinish, initivalValues }) {
+function HairstylistForm({ onFinish, initivalValues }) {
   return (
     <Form
       layout="vertical"
@@ -124,4 +124,4 @@ function DoctorForm({ onFinish, initivalValues }) {
   );
 }
 
-export default DoctorForm;
+export default HairstylistForm;

@@ -32,11 +32,11 @@ function Appointments() {
         dataIndex: "_id",
     },
     {
-      title: "Doctor",
+      title: "Hairstylist",
       dataIndex: "name",
       render: (text, record) => (
         <span>
-          {record.doctorInfo.firstName} {record.doctorInfo.lastName}
+          {record.hairstylistInfo.firstName} {record.hairstylistInfo.lastName}
         </span>
       ),
     },
@@ -45,7 +45,7 @@ function Appointments() {
       dataIndex: "phoneNumber",
       render: (text, record) => (
         <span>
-          {record.doctorInfo.phoneNumber} 
+          {record.hairstylistInfo.phoneNumber} 
         </span>
       ),
     },

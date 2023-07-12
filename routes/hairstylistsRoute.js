@@ -1,65 +1,65 @@
 const express = require("express");
 const router = express.Router();
-const Doctor = require("../models/doctorModel");
+const Hairstylist = require("../models/hairstylistModel");
 const authMiddleware = require("../middlewares/authMiddleware");
 const Appointment = require("../models/appointmentModel");
 const User = require("../models/userModel");
 
-router.post("/get-doctor-info-by-user-id", authMiddleware, async (req, res) => {
+router.post("/get-hairstylist-info-by-user-id", authMiddleware, async (req, res) => {
   try {
-    const doctor = await Doctor.findOne({ userId: req.body.userId });
+    const hairstylist = await Hairstylist.findOne({ userId: req.body.userId });
     res.status(200).send({
       success: true,
-      message: "Doctor info fetched successfully",
-      data: doctor,
+      message: "Hairstylist info fetched successfully",
+      data: hairstylist,
     });
   } catch (error) {
     res
       .status(500)
-      .send({ message: "Error getting doctor info", success: false, error });
+      .send({ message: "Error getting hairstylist info", success: false, error });
   }
 });
 
-router.post("/get-doctor-info-by-id", authMiddleware, async (req, res) => {
+router.post("/get-hairstylist-info-by-id", authMiddleware, async (req, res) => {
   try {
-    const doctor = await Doctor.findOne({ _id: req.body.doctorId });
+    const hairstylist = await Hairstylist.findOne({ _id: req.body.hairstylistId });
     res.status(200).send({
       success: true,
-      message: "Doctor info fetched successfully",
-      data: doctor,
+      message: "Hairstylist info fetched successfully",
+      data: hairstylist,
     });
   } catch (error) {
     res
       .status(500)
-      .send({ message: "Error getting doctor info", success: false, error });
+      .send({ message: "Error getting hairstylist info", success: false, error });
   }
 });
 
-router.post("/update-doctor-profile", authMiddleware, async (req, res) => {
+router.post("/update-hairstylist-profile", authMiddleware, async (req, res) => {
   try {
-    const doctor = await Doctor.findOneAndUpdate(
+    const hairstylist = await Hairstylist.findOneAndUpdate(
       { userId: req.body.userId },
       req.body
     );
     res.status(200).send({
       success: true,
-      message: "Doctor profile updated successfully",
-      data: doctor,
+      message: "Hairstylist profile updated successfully",
+      data: hairstylist,
     });
   } catch (error) {
     res
       .status(500)
-      .send({ message: "Error getting doctor info", success: false, error });
+      .send({ message: "Error getting hairstylist info", success: false, error });
   }
 });
 
 router.get(
-  "/get-appointments-by-doctor-id",
+  "/get-appointments-by-hairstylist-id",
   authMiddleware,
   async (req, res) => {
     try {
-      const doctor = await Doctor.findOne({ userId: req.body.userId });
-      const appointments = await Appointment.find({ doctorId: doctor._id });
+      const hairstylist = await Hairstylist.findOne({ userId: req.body.userId });
+      const appointments = await Appointment.find({ hairstylistId: hairstylist._id });
       res.status(200).send({
         message: "Appointments fetched successfully",
         success: true,

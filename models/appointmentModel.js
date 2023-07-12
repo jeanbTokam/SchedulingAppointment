@@ -5,11 +5,11 @@ const appointmentSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    doctorId: {
+    hairstylistId: {
       type: String,
       required: true,
     },
-    doctorInfo: {
+    hairstylistInfo: {
       type: Object,
       required: true,
     },

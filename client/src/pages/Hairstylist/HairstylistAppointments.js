@@ -7,14 +7,14 @@ import axios from "axios";
 import { Table } from "antd";
 import moment from "moment";
 
-function DoctorAppointments() {
+function HairstylistAppointments() {
   const [appointments, setAppointments] = useState([]);
   const dispatch = useDispatch();
   const getAppointmentsData = async () => {
     try {
       dispatch(showLoading());
       const resposne = await axios.get(
-        "/api/doctor/get-appointments-by-doctor-id",
+        "/api/hairstylist/get-appointments-by-hairstylist-id",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -34,7 +34,7 @@ function DoctorAppointments() {
     try {
       dispatch(showLoading());
       const resposne = await axios.post(
-        "/api/doctor/change-appointment-status",
+        "/api/hairstylist/change-appointment-status",
         { appointmentId : record._id, status: status },
         {
           headers: {
@@ -48,7 +48,7 @@ function DoctorAppointments() {
         getAppointmentsData();
       }
     } catch (error) {
-      toast.error("Error changing doctor account status");
+      toast.error("Error changing hairstylist account status");
       dispatch(hideLoading());
     }
   };
@@ -65,7 +65,7 @@ function DoctorAppointments() {
     {
       title: "Phone",
       dataIndex: "phoneNumber",
-      render: (text, record) => <span>{record.doctorInfo.phoneNumber}</span>,
+      render: (text, record) => <span>{record.hairstylistInfo.phoneNumber}</span>,
     },
     {
       title: "Date & Time",
@@ -118,4 +118,4 @@ function DoctorAppointments() {
   );
 }
 
-export default DoctorAppointments;
+export default HairstylistAppointments;

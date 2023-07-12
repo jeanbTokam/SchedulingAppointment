@@ -8,14 +8,14 @@ import Home from "./pages/Home";
 import { useSelector } from "react-redux";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
-import ApplyDoctor from "./pages/ApplyDoctor";
+import ApplyHairstylist from "./pages/ApplyHairstylist";
 import Notifications from "./pages/Notifications";
 import Userslist from "./pages/Admin/Userslist";
-import DoctorsList from "./pages/Admin/DoctorsList";
-import Profile from "./pages/Doctor/Profile";
+import HairstylistsList from "./pages/Admin/HairstylistList";
+import Profile from "./pages/Hairstylist/Profile";
 import BookAppointment from "./pages/BookAppointment";
 import Appointments from "./pages/Appointments";
-import DoctorAppointments from "./pages/Doctor/DoctorAppointments";
+import HairstylistAppointments from "./pages/Hairstylist/HairstylistAppointments";
 
 function App() {
   const { loading } = useSelector((state) => state.alerts);
@@ -53,10 +53,10 @@ function App() {
           }
         />
         <Route
-          path="/apply-doctor"
+          path="/apply-hairstylist"
           element={
             <ProtectedRoute>
-              <ApplyDoctor />
+              <ApplyHairstylist />
             </ProtectedRoute>
           }
         />
@@ -78,16 +78,16 @@ function App() {
         />
 
         <Route
-          path="/admin/doctorslist"
+          path="/admin/hairstylistslist"
           element={
             <ProtectedRoute>
-              <DoctorsList />
+              <HairstylistsList />
             </ProtectedRoute>
           }
         />
 
         <Route
-          path="/doctor/profile/:userId"
+          path="/hairstylist/profile/:userId"
           element={
             <ProtectedRoute>
               <Profile />
@@ -96,7 +96,7 @@ function App() {
         />
 
         <Route
-          path="/book-appointment/:doctorId"
+          path="/book-appointment/:hairstylistId"
           element={
             <ProtectedRoute>
               <BookAppointment />
@@ -113,10 +113,10 @@ function App() {
         />
 
         <Route
-          path="/doctor/appointments"
+          path="/hairstylist/appointments"
           element={
             <ProtectedRoute>
-              <DoctorAppointments />
+              <HairstylistAppointments />
             </ProtectedRoute>
           }
         />

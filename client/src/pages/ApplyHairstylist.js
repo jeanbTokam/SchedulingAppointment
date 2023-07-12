@@ -6,10 +6,10 @@ import { showLoading, hideLoading } from "../redux/alertsSlice";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import DoctorForm from "../components/DoctorForm";
+import HairstylistForm from "../components/HairstylistForm";
 import moment from "moment";
 
-function ApplyDoctor() {
+function ApplyHairstylist() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ function ApplyDoctor() {
     try {
       dispatch(showLoading());
       const response = await axios.post(
-        "/api/user/apply-doctor-account",
+        "/api/user/apply-hairstylist-account",
         {
           ...values,
           userId: user._id,
@@ -47,12 +47,12 @@ function ApplyDoctor() {
 
   return (
     <Layout>
-      <h1 className="page-title">Apply Doctor</h1>
+      <h1 className="page-title">Apply Hairstylist</h1>
       <hr />
 
-      <DoctorForm onFinish={onFinish} />
+      <HairstylistForm onFinish={onFinish} />
     </Layout>
   );
 }
 
-export default ApplyDoctor;
+export default ApplyHairstylist;

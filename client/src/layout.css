@@ -12,9 +12,9 @@
     margin-top:-20px ;
 }
 .sidebar{
-    background-color: #005555;
+    background-color: #6588d7;
     border-radius: 5px;
-    box-shadow: 0 0 2px gray;
+    box-shadow: 0 0 2px rgb(159, 90, 220);
     margin-right: 20px;
     min-height: 100%;
     padding: 10px;
@@ -37,7 +37,7 @@
 .body{
     background-color: white;
     border-radius: 5px;
-    box-shadow: 0 0 2px gray;
+    box-shadow: 0 0 2px rgb(60, 115, 217);
     height: 82vh;
     width: 100%;
     padding: 15px;

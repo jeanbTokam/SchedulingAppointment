@@ -7,32 +7,32 @@ import axios from "axios";
 import { Table } from "antd";
 import moment from "moment";
 
-function DoctorsList() {
-  const [doctors, setDoctors] = useState([]);
+function HairstylistsList() {
+  const [hairstylists, setHairstylists] = useState([]);
   const dispatch = useDispatch();
-  const getDoctorsData = async () => {
+  const getHairstylistsData = async () => {
     try {
       dispatch(showLoading());
-      const resposne = await axios.get("/api/admin/get-all-doctors", {
+      const resposne = await axios.get("/api/admin/get-all-hairstylists", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
       dispatch(hideLoading());
       if (resposne.data.success) {
-        setDoctors(resposne.data.data);
+        setHairstylists(resposne.data.data);
       }
     } catch (error) {
       dispatch(hideLoading());
     }
   };
 
-  const changeDoctorStatus = async (record, status) => {
+  const changeHairstylistStatus = async (record, status) => {
     try {
       dispatch(showLoading());
       const resposne = await axios.post(
-        "/api/admin/change-doctor-account-status",
-        { doctorId: record._id, userId: record.userId, status: status },
+        "/api/admin/change-hairstylist-account-status",
+        { hairstylistId: record._id, userId: record.userId, status: status },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -42,15 +42,15 @@ function DoctorsList() {
       dispatch(hideLoading());
       if (resposne.data.success) {
         toast.success(resposne.data.message);
-        getDoctorsData();
+        getHairstylistsData();
       }
     } catch (error) {
-      toast.error('Error changing doctor account status');
+      toast.error('Error changing hairstylist account status');
       dispatch(hideLoading());
     }
   };
   useEffect(() => {
-    getDoctorsData();
+    getHairstylistsData();
   }, []);
   const columns = [
     {
@@ -83,7 +83,7 @@ function DoctorsList() {
           {record.status === "pending" && (
             <h1
               className="anchor"
-              onClick={() => changeDoctorStatus(record, "approved")}
+              onClick={() => changeHairstylistStatus(record, "approved")}
             >
               Approve
             </h1>
@@ -91,7 +91,7 @@ function DoctorsList() {
           {record.status === "approved" && (
             <h1
               className="anchor"
-              onClick={() => changeDoctorStatus(record, "blocked")}
+              onClick={() => changeHairstylistStatus(record, "blocked")}
             >
               Block
             </h1>
@@ -102,11 +102,11 @@ function DoctorsList() {
   ];
   return (
     <Layout>
-      <h1 className="page-header">Doctors List</h1>
+      <h1 className="page-header">Hairstylists List</h1>
       <hr />
-      <Table columns={columns} dataSource={doctors} />
+      <Table columns={columns} dataSource={hairstylists} />
     </Layout>
   );
 }
 
-export default DoctorsList;
+export default HairstylistsList;

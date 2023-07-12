@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const doctorSchema = new mongoose.Schema(
+const hairstylistSchema = new mongoose.Schema(
   {
     userId: {
       type: String,
@@ -51,5 +51,5 @@ const doctorSchema = new mongoose.Schema(
   }
 );
 
-const doctorModel = mongoose.model("doctors", doctorSchema);
-module.exports = doctorModel;
+const hairstylistModel = mongoose.model("hairstylists", hairstylistSchema);
+module.exports = hairstylistModel;

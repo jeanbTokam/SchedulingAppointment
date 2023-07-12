@@ -6,7 +6,7 @@ import { showLoading, hideLoading } from "../redux/alertsSlice";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
-import DoctorForm from "../components/DoctorForm";
+import HairstylistForm from "../components/HairstylistForm";
 import moment from "moment";
 
 function BookAppointment() {
@@ -15,17 +15,17 @@ function BookAppointment() {
   const [date, setDate] = useState();
   const [time, setTime] = useState();
   const { user } = useSelector((state) => state.user);
-  const [doctor, setDoctor] = useState(null);
+  const [hairstylist, setHairstylist] = useState(null);
   const params = useParams();
   const dispatch = useDispatch();
 
-  const getDoctorData = async () => {
+  const getHairstylistData = async () => {
     try {
       dispatch(showLoading());
       const response = await axios.post(
-        "/api/doctor/get-doctor-info-by-id",
+        "/api/hairstylist/get-hairstylist-info-by-id",
         {
-          doctorId: params.doctorId,
+          hairstylistId: params.hairstylistId,
         },
         {
           headers: {
@@ -36,7 +36,7 @@ function BookAppointment() {
 
       dispatch(hideLoading());
       if (response.data.success) {
-        setDoctor(response.data.data);
+        setHairstylist(response.data.data);
       }
     } catch (error) {
       console.log(error);
@@ -49,7 +49,7 @@ function BookAppointment() {
       const response = await axios.post(
         "/api/user/check-booking-avilability",
         {
-          doctorId: params.doctorId,
+          hairstylistId: params.hairstylistId,
           date: date,
           time: time,
         },
@@ -78,9 +78,9 @@ function BookAppointment() {
       const response = await axios.post(
         "/api/user/book-appointment",
         {
-          doctorId: params.doctorId,
+          hairstylistId: params.hairstylistId,
           userId: user._id,
-          doctorInfo: doctor,
+          hairstylistInfo: hairstylist,
           userInfo: user,
           date: date,
           time: time,
@@ -105,14 +105,14 @@ function BookAppointment() {
   };
 
   useEffect(() => {
-    getDoctorData();
+    getHairstylistData();
   }, []);
   return (
     <Layout>
-      {doctor && (
+      {hairstylist && (
         <div>
           <h1 className="page-title">
-            {doctor.firstName} {doctor.lastName}
+            {hairstylist.firstName} {hairstylist.lastName}
           </h1>
           <hr />
           <Row gutter={20} className="mt-5" align="middle">
@@ -127,23 +127,23 @@ function BookAppointment() {
             </Col>
             <Col span={8} sm={24} xs={24} lg={8}>
               <h1 className="normal-text">
-                <b>Timings :</b> {doctor.timings[0]} - {doctor.timings[1]}
+                <b>Timings :</b> {hairstylist.timings[0]} - {hairstylist.timings[1]}
               </h1>
               <p>
                 <b>Phone Number : </b>
-                {doctor.phoneNumber}
+                {hairstylist.phoneNumber}
               </p>
               <p>
                 <b>Address : </b>
-                {doctor.address}
+                {hairstylist.address}
               </p>
               <p>
                 <b>Fee per Visit : </b>
-                {doctor.feePerCunsultation}
+                {hairstylist.feePerCunsultation}
               </p>
               <p>
                 <b>Website : </b>
-                {doctor.website}
+                {hairstylist.website}
               </p>
               <div className="d-flex flex-column pt-2 mt-2">
                 <DatePicker
