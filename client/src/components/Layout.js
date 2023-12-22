@@ -58,7 +58,7 @@ function Layout({ children }) {
       icon: "ri-user-line",
     },
     {
-      name: "Hairstylists",
+      name: "Doctors",
       path: "/admin/hairstylistslist",
       icon: "ri-user-star-line",
     },
@@ -76,7 +76,7 @@ function Layout({ children }) {
       <div className="d-flex layout">
         <div className="sidebar">
           <div className="sidebar-header">
-            <h1 className="logo">BRAIDING SALOON</h1>
+            <h1 className="logo">BWH HOSPITAL</h1>
             <h1 className="role">{role}</h1>
           </div>
 

@@ -30,7 +30,7 @@ function Login() {
   return (
     <div className="authentication">
       <div className="authentication-form card p-3">
-        <h1 className="card-title">Welcome To First Lady Hair Braiding Saloon</h1>
+        <h1 className="card-title">Welcome To BWH</h1>
         <Form layout="vertical" onFinish={onFinish}>
           <Form.Item label="Email" name="email">
             <Input placeholder="Email" />
